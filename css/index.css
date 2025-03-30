@@ -1,0 +1,50 @@
+
+/* .index-the-main-stuff {
+    position: absolute;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0);
+    margin: 7% 15%;
+    width: max-content;
+    font-family: Inria sans;
+    font-size: 18px;
+    font-weight: 200;
+    color: #FFE9BA;
+} */
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-family: Inria sans, Inter, sans-serif;
+    background-color: #0B1140;
+    color: #FFE9BA;
+}
+
+.container {
+    position: relative;
+    height: 300vh; /* More space for scrolling */
+}
+
+.background {
+    position: fixed;
+    top: 30vh;
+    left: 50%;
+    transform: translateX(-50%) scale(0.8);
+    width: 100vw;
+    height: 100vh;
+    background: url('/media/the-cover-pic.png') no-repeat center center;
+    background-size: contain;
+    transition: transform 0.8s ease-out;
+}
+
+.text {
+    position: fixed;
+    top: 30vh; /* Starts half-overlapping background */
+    width: 100%;
+    text-align: center;
+    font-size: 5vw;
+    font-weight: bold;
+    color: white;
+    z-index: 10;
+    transition: transform 0.3s ease-out;
+}
