@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Form</title>
+    <style>
+        body {
+            background-color: #0e1636;
+            color: #f2e7cf;
+            font-family: "Inria Sans", sans-serif;
+            font-weight: 300;
+            font-style: normal;
+            text-align: center;
+            margin: 0;
+            padding: 0px;
+        }
+
+        .app-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px;
+            background-color: #0B1140;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            margin-top: 3rem;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 16px;
+            color: #f2e7cf;
+        }
+
+        select, input[type="text"] {
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #9090b0;
+            background-color: #0B1140;
+            color: #f2e7cf;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border-radius: 10px;
+            background-color: #E1A995;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #D790B4;
+        }
+    </style>
+</head>
+<body>
+    <div id="navbar-container">
+        {% include 'navbar.html' %}
+    </div>
+    <div class="app-container">
+        <h1>Review Form</h1>
+        <form id="review-form" action="main.html" method="POST">
+            <div class="form-group">
+                <label for="review-type">Review Type</label>
+                <select id="review-type" name="review-type" required>
+                    <option value="peer">Peer</option>
+                    <option value="self">Self</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="reviewer-name">Reviewer Name</label>
+                <input type="text" id="reviewer-name" name="reviewer-name" required>
+            </div>
+            <div class="form-group" id="reviewee-name-group">
+                <label for="reviewee-name">Reviewee Name </label>
+                <input type="text" id="reviewee-name" name="reviewee-name">
+            </div>
+            <div class="form-group">
+                <label for="cca">CCA</label>
+                <select id="cca" name="cca" required>
+                    <option value="">Select CCA</option>
+                    <!-- CCA list will be populated dynamically -->
+                </select>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        // CCA List
+        const ccaList = [
+            "Art Club", "Astronomy Club", "Badminton", "Basketball", "Calligraphy", "Canoeing",
+            "Chinese Orchestra", "Chinese Society 黄城 / 创贤 / 未央", "CIP Council", "Choir", 
+            "CCA Council", "ELDDFS", "Fencing", "Football", "Guitar Ensemble", "Green Council", 
+            "Infocomm & Robotics Society", "Interact Club", "Judo", "Library Club", "Mindsports", 
+            "Music and Dance", "Netball", "Outdoor Education Students’ Club", "Publications Society", 
+            "Shooting", "Softball", "Students’ Council", "Students’ National Education Council", 
+            "String Ensemble", "Symphonic Band", "Table Tennis", "Taekwondo", "Tennis", 
+            "Touch Rugby", "Track & Field", "Ultimate Frisbee", "Volleyball", "Waterpolo", "Wushu"
+        ];
+
+        // Populate the CCA dropdown
+        const ccaSelect = document.getElementById("cca");
+        ccaList.sort().forEach(cca => {
+            const option = document.createElement("option");
+            option.value = cca;
+            option.textContent = cca;
+            ccaSelect.appendChild(option);
+        });
+
+        // Update the form behavior based on review type (Peer vs. Self)
+        const reviewTypeSelect = document.getElementById("review-type");
+        const revieweeNameGroup = document.getElementById("reviewee-name-group");
+
+        reviewTypeSelect.addEventListener("change", () => {
+            if (reviewTypeSelect.value === "peer") {
+                revieweeNameGroup.style.display = "block";
+            } else {
+                revieweeNameGroup.style.display = "none";
+            }
+        });
+
+        // Redirect to quiz page after form submission
+        document.getElementById("review-form").addEventListener("submit", function(event) {
+            event.preventDefault();  
+            window.location.href = "quiz";  
+        });
+    </script>
+</body>
+</html>
