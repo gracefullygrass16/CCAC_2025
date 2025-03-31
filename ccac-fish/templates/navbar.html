@@ -1,18 +1,28 @@
-
-<link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
 <nav class="navbar">
     <div class="nav-left">
-        <a href="index.html" class="nav-link">STUDENT APPRAISALS</a>
+      <a href="index.html" class="nav-link">STUDENT APPRAISALS</a>
     </div>
 
     <div class="nav-right">
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="#">Appraisal</a></li>
-            <li><a href="#">Results</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Logout</a></li>
+      <button id="menu-toggle" class="menu-button">
+        MENU 
+        <img src="media/hamburger.png" alt="Menu" class="icon" id="menu-icon">
+      </button>
+
+      <div id="menu-dropdown" class="menu-dropdown hidden">
+        <button id="menu-close" class="close-button">
+          MENU
+          <img src="media/close.png" alt="Close" class="icon">
+        </button>
+        <ul>
+          <li><a href="index.html">HOME</a></li>
+          <li><a href="#">APPRAISAL</a></li>
+          <li><a href="#">RESULTS</a></li>
+          <li><a href="#">PROFILE</a></li>
+          <li><a href="#">LOGOUT</a></li>
         </ul>
-        </div>
+      </div>
+
     </div>
 </nav>

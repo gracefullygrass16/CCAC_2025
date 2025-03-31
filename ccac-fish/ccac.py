@@ -8,7 +8,7 @@ ccac.secret_key = "your_secret_key"
 
 @ccac.route("/")
 def index():
-    return render_template("pre-review.html")
+    return render_template("index.html")
 
 @ccac.route("/quiz")
 def quiz():
