@@ -1,28 +1,9 @@
 
-/* .index-the-main-stuff {
-    position: absolute;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0);
-    margin: 7% 15%;
-    width: max-content;
-    font-family: Inria sans;
-    font-size: 18px;
-    font-weight: 200;
-    color: #FFE9BA;
-} */
 
-body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    font-family: Inria sans, Inter, sans-serif;
-    background-color: #0B1140;
-    color: #FFE9BA;
-}
-
+/* for the scrolling part that idk how to code */
 .container {
     position: relative;
-    height: 300vh; /* More space for scrolling */
+    height: 200vh; /* More space for scrolling */
 }
 
 .background {
@@ -47,4 +28,356 @@ body {
     color: white;
     z-index: 10;
     transition: transform 0.3s ease-out;
+}
+
+
+/* the main content */
+.index-the-main-stuff {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 50px 130px;
+    /* padding: 50px 150px; */
+    gap: 100px;
+    /* from gap: 200px; */
+}
+
+.to-understand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    /* from 100px */
+}
+
+.understand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    color: #FFE9BA;
+
+}
+
+.understand-title {
+    font-size: 40px;
+    /* from 50px */
+    font-weight: 400;
+    text-align: center;
+}
+
+.understand-subtitle {
+    font-size: 15px; 
+    /* from 20px */
+    font-weight: 300;
+    text-align: center;
+}
+
+.understand-content-1 {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    color: #F5ECD9;
+}
+
+.understand-left,
+.understand-right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 0 0 46%;
+    text-align: left;
+    font-size: 14px;
+    /* from 18px */
+    font-weight: 300;
+    line-height: 22px;
+    /* from 28px */
+}
+
+.understand-middle {
+    display: flex;
+    flex: 0 0 8%;
+}
+
+.understand-left .paragraph {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.understand-right {
+    gap: 30px;
+}
+
+.lead-up-to-quiz {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.taking-the-quiz {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; 
+    /* gap: 12px;  */
+}
+
+.quiz-button {
+    width: fit-content;
+    background: linear-gradient(180deg, #FFE9BA 0%, #F5ECD9 100%);
+    color: #000000;
+    font-family: 'Inter';
+    font-size: 12px;
+    /* font-size: 16px; */
+    padding: 10px 25px;
+    /* from padding: 13px 30px; */
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.quiz-button:hover {
+    background-color: #e6d1b8;
+}
+
+
+
+.understand-content-2 {
+    display: flex;
+    flex-direction: column;
+    gap: 62px;
+}
+
+.type-1, .type-2 {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.avatar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    flex: 0 0 30%;
+}
+
+.the-avatar {
+    object-fit: contain;
+}
+
+.the-avatar img {
+    width: 180px;
+    /* width: 236px; */
+    height: auto;
+}
+
+.the-avatar-name {
+    font-family: "Libre Barcode 39 Text";
+    font-weight: 400;
+    color: #FFE9BA;
+    font-size: 30px;
+    /* font-size: 40px; */
+    text-align: center;
+}
+
+.avatar-middle {
+    flex: 0 0 5%;
+}
+
+.avatar-words {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-family: 'Inria Sans';
+    flex: 0 0 65%;
+}
+
+.avatar-words-title {
+    font-weight: 700;
+    font-size: 25px;
+    /* font-size: 35px; */
+    color: #FFE9BA;
+    padding-top: 20px;
+}
+
+.avatar-words-description {
+    font-weight: 300;
+    font-size: 14px;
+    /* font-size: 18px; */
+    color: #F5ECD9;
+}
+
+
+
+@media only screen and (min-width: 1240px){
+
+    .index-the-main-stuff {
+        padding: 50px 150px;
+        gap: 200px;
+    }
+
+    .to-understand {
+        gap: 100px;
+    }
+
+    .understand-title {
+        font-size: 50px;
+        font-weight: 400;
+        text-align: center;
+    }
+
+    .understand-subtitle {
+        font-size: 20px; 
+    }
+
+    .understand-left,
+    .understand-right {
+        font-size: 18px;
+        line-height: 28px;
+    }
+
+    .taking-the-quiz {
+        gap: 12px;
+    }
+
+    .quiz-button {
+        font-size: 16px;
+        padding: 13px 30px;
+    }
+
+    .the-avatar img {
+        width: 236px;
+    }
+    
+    .the-avatar-name {
+        font-size: 40px;
+    }
+
+    .avatar-words-title {
+        font-size: 35px;
+    }
+    
+    .avatar-words-description {
+        font-size: 16px;
+    }
+
+}
+
+
+@media only screen and (max-width: 1024px) {
+
+
+    .avatar {
+        flex: 0 0 20%
+    }
+
+    .avatar-middle {
+        flex: 0 0 5%;
+    }
+
+    .avatar-words {
+        flex: 0 0 75%;
+    }
+
+    .avatar-words-title {
+        padding-top: 0;
+    }
+
+    .the-avatar img {
+        width: 150px;
+    }
+    
+    .the-avatar-name {
+        font-size: 25px;
+    }
+
+    .avatar-words-description {
+        font-size: 13px;
+    }
+    
+}
+
+
+@media only screen and (max-width: 768px) {
+    .index-the-main-stuff {
+        padding: 50px 80px;
+    }
+    
+    .understand-content-1 {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .understand-left,
+    .understand-right {
+        font-size: 13px;
+        align-items: center;
+        text-align: center;
+    }
+
+    .quiz-button {
+        align-self: center;
+    }
+
+
+    .the-avatar img {
+        width: 130px;
+    }
+    
+    .the-avatar-name {
+        font-size: 20px;
+    }
+
+    .avatar-words {
+        gap: 3px;
+    }
+    
+    .avatar-words-title {
+        font-size: 20px;
+    }
+
+    .avatar-words-description {
+        font-size: 11px;
+    }
+
+}
+
+@media only screen and (max-width: 500px) {
+    .index-the-main-stuff {
+        padding: 50px 50px;
+    }
+
+    .understand-title {
+        font-size: 30px;
+    }
+
+    .understand-left,
+    .understand-right {
+        font-size: 11px;
+        line-height: 18px;
+    }
+    
+    .understand-subtitle {
+        font-size: 15px; 
+    }
+
+    .type-1, .type-2 {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .type-2 {
+        flex-direction: column-reverse;
+    }
+
+    .the-avatar-name {
+        display: none;
+    }
+
 }
