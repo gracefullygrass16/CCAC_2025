@@ -188,18 +188,17 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         const normalizedScores = [
-            (sensibilityScore / (maxScore * sensibilityQuestions.length)) * 100,
-            (trustworthinessScore / (maxScore * trustworthinessQuestions.length)) * 100,
-            (altruismScore / (maxScore * altruismQuestions.length)) * 100,
-            (selfDisciplineScore / (maxScore * selfDisciplineQuestions.length)) * 100,
-            (resilienceScore / (maxScore * resilienceQuestions.length)) * 100
+            Math.round((sensibilityScore / (maxScore * sensibilityQuestions.length)) * 100),
+            Math.round((trustworthinessScore / (maxScore * trustworthinessQuestions.length)) * 100),
+            Math.round((altruismScore / (maxScore * altruismQuestions.length)) * 100),
+            Math.round((selfDisciplineScore / (maxScore * selfDisciplineQuestions.length)) * 100),
+            Math.round((resilienceScore / (maxScore * resilienceQuestions.length)) * 100)
         ];
 
-        // Send data to Flask server
         fetch("/submit-results", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ selections, collection: "self", normalized_scores: normalizedScores }) // Send selections and normalized scores
+            body: JSON.stringify({ selections, collection: "self", normalized_scores: normalizedScores })
         })
         .then(response => response.json())
         .then(data => {
