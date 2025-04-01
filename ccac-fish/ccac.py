@@ -1,20 +1,33 @@
 from flask import Flask, render_template, jsonify, request
-import matplotlib.pyplot as plt
+import matplotlib
+from matplotlib import pyplot as plt
+matplotlib.use('Agg')
 import io
 import base64
 
-ccac = Flask(__name__)
-ccac.secret_key = "your_secret_key"
+ccac = Flask(__name__, static_folder="static")
 
 @ccac.route("/")
 def index():
     return render_template("index.html")
 
+@ccac.route("/pre-review")
+def pre():
+    return render_template("pre-review.html")
+
 @ccac.route("/quiz")
 def quiz():
     return render_template("quiz.html")
 
-@ccac.route("/submit-results", methods=['POST'])
+@ccac.route("/footer")
+def footer():
+    return render_template("footer.html")
+
+@ccac.route("/navbar")
+def nav():
+    return render_template("navbar.html")
+
+@ccac.route("/submit-results", methods=['GET','POST'])
 def submit_quiz():
     try:
         data = request.get_json()
@@ -61,4 +74,5 @@ def generate_bar_chart(scores):
     return f"data:image/png;base64,{img_base64}"
 
 if __name__ == "__main__":
-    ccac.run(debug=True)
+    ccac.run(debug=True, host="0.0.0.0", port=5001)
+

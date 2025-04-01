@@ -1,28 +1,307 @@
-<link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+<style>
+  body {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    font-family: "Inria Sans", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    background-color: #0B1140;
+    overflow-x: hidden;
+  }
+
+
+/* navbar styles */
+#navbar-container {
+  position: sticky;
+  top: 40px; 
+  z-index: 100;
+  transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out; 
+  opacity: 1; 
+}
+
+.navbar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 25px;
+  align-items: center;
+  background-color:rgba(0, 0, 0, 0);
+  padding: 0px 50px 20px 50px;
+  color: rgb(86, 75, 52);
+  }
+  
+  .nav-left .nav-link {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+  }
+  
+  /* Right side (menu button) */
+  .nav-right {
+    position: relative;
+    font-family: 'Inter';
+  }
+  
+  .menu-button {
+    background: #FFEDC5;
+    border: none;
+    padding: 15px 34px;
+    border-radius: 50px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: rgb(86, 75, 52);
+  }
+  
+  .menu-button .icon {
+    width: 18px;
+    height: 18px;
+  }
+  
+  /* dropdown menu */
+  .menu-dropdown {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 15px;
+    background: #FFEDC5;
+    border-radius: 28px;
+    padding: 15px 34px 15px 27px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .menu-dropdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .menu-dropdown ul li {
+    padding: 7px 0;
+  }
+  
+  .menu-dropdown ul li a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    display: block;
+    font-size: 14px;
+    text-align: right;
+  }
+  
+  .menu-dropdown.hidden {
+    display: none;
+  }
+
+  .close-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 14px;
+    gap: 12px;
+    padding: 0;
+  }
+
+  .close-button .icon {
+    width: 18px;
+    height: 18px;
+  }
+
+
+/* footer styles */
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0);
+  padding: 100px 50px 50px 50px;
+  gap: 6vw;
+}
+
+.footer-lines {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+}
+
+.footer-lines img {
+  width: 100%; 
+  height: auto; 
+  object-fit: contain;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: row;
+  font-family: 'Inria Sans';
+  padding: 0 50px 0 50px;
+}
+
+.footer-content-left {
+  flex: 0 0 55%;
+  align-self: flex-end;
+}
+
+.sign-off-title {
+  font-weight: 700;
+  font-size: 16px;
+  color: #FFF1C1;
+}
+
+.sign-off-content {
+  font-weight: 300;
+  font-size: 16px;
+  color: #F5ECD9;
+}
+
+.footer-content-right {
+  font-weight: 300;
+  font-size: 12px;
+  color: #F5ECD9;
+  padding-left: 3vw;
+  padding-bottom: 4vw;
+}
+
+
+
+
+@media only screen and (max-width: 1024px) {
+  .nav-left .nav-link {
+    font-size: 14px;
+  }
+
+  .menu-button {
+    padding: 12px 26px;
+    font-size: 13px;
+    gap: 10px;
+  }
+
+  .menu-button .icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .menu-dropdown {
+    gap: 10px;
+    padding: 12px 26px 12px 22px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .menu-dropdown ul li a {
+    font-size: 12px;
+  }
+
+  .close-button {
+    font-size: 13px;
+    gap: 10px;
+  }
+
+  .close-button .icon {
+    width: 16px;
+    height: 16px;
+  }
+
+}
+
+
+@media only screen and (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    padding: 0 30px;
+    gap: 30px;
+  }
+
+  .footer-content-left {
+    align-self: flex-start;
+  }
+
+  .sign-off-title {
+    font-size: 14px;
+  }
+  
+  .sign-off-content {
+    font-size: 12px;
+  }
+
+  .footer-content-right {
+    padding: 0;
+    font-size: 9px;
+  }
+
+
+}
+
+@media only screen and (max-width: 500px) {
+
+  .navbar {
+    justify-content: space-between;
+    padding: 0px 50px 20px 50px;
+  }
+
+}
+</style>
+
+
 <nav class="navbar">
     <div class="nav-left">
-      <a href="index.html" class="nav-link">STUDENT APPRAISALS</a>
+      <a href="/" class="nav-link">STUDENT APPRAISALS</a>
     </div>
 
     <div class="nav-right">
       <button id="menu-toggle" class="menu-button">
         MENU 
-        <img src="media/hamburger.png" alt="Menu" class="icon" id="menu-icon">
+        <img src="{{ url_for('static', filename='media/hamburger.png') }}" alt="Menu" class="icon" id="menu-icon">
       </button>
 
       <div id="menu-dropdown" class="menu-dropdown hidden">
         <button id="menu-close" class="close-button">
           MENU
-          <img src="media/close.png" alt="Close" class="icon">
+          <img src="{{ url_for('static', filename='media/close.png') }}" alt="Close" class="icon">
         </button>
         <ul>
-          <li><a href="index.html">HOME</a></li>
-          <li><a href="#">APPRAISAL</a></li>
-          <li><a href="#">RESULTS</a></li>
+          <li><a href="/">HOME</a></li>
+          <li><a href="/quiz">APPRAISAL</a></li>
+          <li><a href="/results">RESULTS</a></li>
           <li><a href="#">PROFILE</a></li>
           <li><a href="#">LOGOUT</a></li>
         </ul>
       </div>
-
     </div>
 </nav>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const menuToggle = document.getElementById("menu-toggle");
+    const menuDropdown = document.getElementById("menu-dropdown");
+    const menuClose = document.getElementById("menu-close");
+
+    if (menuToggle && menuDropdown && menuClose) {
+        menuToggle.addEventListener("click", () => {
+            menuDropdown.classList.toggle("hidden");
+        });
+
+        menuClose.addEventListener("click", () => {
+            menuDropdown.classList.add("hidden");
+        });
+    }
+
+    const navbar = document.getElementById("navbar-container");
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener("scroll", function () {
+        let currentScrollY = window.scrollY;
+        navbar.style.opacity = currentScrollY > lastScrollY ? "0" : "1";
+        lastScrollY = currentScrollY;
+    });
+});
+</script>
