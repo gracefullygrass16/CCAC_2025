@@ -9,4 +9,5 @@ home page design for scrolling (inspiration): https://era.estate/
 3. after background fully expands, background image becomes static and basically scrolls normally with the content
 
 
+-btw to load the full quiz uncomment the questions in quiz.js cause i commented out most of the questions so debugging is easier 
 
