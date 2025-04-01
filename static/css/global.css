@@ -147,6 +147,7 @@ body {
   flex-direction: row;
   font-family: 'Inria Sans';
   padding: 0 50px 0 50px;
+  text-align: left;
 }
 
 .footer-content-left {

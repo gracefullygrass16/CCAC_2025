@@ -1,3 +1,5 @@
+//Trying to make the scroll effect in the readme and failing asdgjkl
+
 window.addEventListener("scroll", function() {
     let scrollPos = window.scrollY;
     let bg = document.getElementById("bg");
@@ -9,7 +11,6 @@ window.addEventListener("scroll", function() {
     text.style.transform = `translateY(${scrollPos * -0.08}px)`; // Slower scroll-up effect (parallex effect)
 
 });
-
 
 // window.addEventListener("scroll", function() {
 //     let scrollPos = window.scrollY;
@@ -45,4 +46,16 @@ window.addEventListener("scroll", function() {
 //         text.style.top = "50vh";
 //     }
 // });
+
+
+
+//for redirecting of TAKE THE QUIZ button
+document.addEventListener("DOMContentLoaded", function () {
+    const quizButton = document.getElementById("quizButtonTakeQuiz");
+    if (quizButton) {
+        quizButton.addEventListener("click", function () {
+            window.location.href = "/pre-review";  // Redirects to pre-review.html
+        });
+    }
+});
 

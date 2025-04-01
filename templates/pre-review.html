@@ -2,66 +2,132 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Review Form</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Libre+Barcode+39+Text&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=AR+One+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=favorite,home,search,settings" rel="stylesheet" />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+
+    <title>Student Appraisal</title>
+
     <style>
         body {
             background-color: #0e1636;
-            color: #f2e7cf;
-            font-family: "Inria Sans", sans-serif;
-            font-weight: 300;
-            font-style: normal;
+            color: #FFFFFF;
+            font-family: 'AR One Sans', 'Inria sans', 'Inter', sans-serif;
+            font-weight: 600;
             text-align: center;
             margin: 0;
-            padding: 0px;
+            padding: 0;
         }
 
         .app-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 50px;
+            padding: 70px 50px;
             background-color: #0B1140;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
             margin-top: 3rem;
         }
 
-        h1 {
-            margin: 0;
-            font-size: 32px;
+        .appraisal-heading-thing {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: #FFE9BA;
+            font-family: 'Inria sans';
+
         }
 
-        .form-group {
-            margin-bottom: 20px;
+        .appraisal-title {
+            font-size: 40px;
+            font-weight: 400;
+            text-align: center;
         }
+
+        .appraisal-subtitle {
+            font-size: 15px; 
+            font-weight: 300;
+            text-align: center;
+        }
+
+
+        .review-form-stuff {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            justify-content: center;
+        }
+
+
+        .review-form-questions {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            justify-content: center;
+            padding: 50px 200px;
+        }
+
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            justify-content: center;
+        }
+
 
         label {
             font-size: 16px;
-            color: #f2e7cf;
+            color: white;
         }
 
         select, input[type="text"] {
             padding: 10px;
-            width: 100%;
             border-radius: 5px;
             border: 1px solid #9090b0;
             background-color: #0B1140;
-            color: #f2e7cf;
-            font-size: 16px;
+            color: white;
+            font-size: 15px;
         }
 
-        button {
-            padding: 10px 20px;
-            border-radius: 10px;
-            background-color: #E1A995;
+        .review-form-submitting {
+            display: flex;
+            justify-content: center;
+        }
+
+        .submit-button {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            background: linear-gradient(180deg, #FFE9BA 0%, #F5ECD9 100%);
+            border-radius: 50px;
+            padding: 13px 25px;
+            gap: 10px;
             border: none;
             cursor: pointer;
-            font-size: 16px;
+
+            font-family: 'Inter';
+            font-weight: 400;
+            font-size: 14px;
         }
 
-        button:hover {
+        .submit-button:hover {
             background-color: #D790B4;
         }
+
+        .next-icon {
+            width: 18px;
+            height: 18px;
+        }
+
     </style>
 </head>
 
@@ -69,34 +135,55 @@
     <div id="navbar-container">
         {% include 'navbar.html' %}
     </div>
+    
     <div class="app-container">
-        <h1>Review Form</h1>
+        <div class="appraisal-heading-thing">
+            <div class="appraisal-title">APPRAISAL</div>
+            <div class="appraisal-subtitle">FIND OUT WHAT MAKES YOU A GREAT LEADER</div>
+        </div>
+
         <form id="review-form" action="main.html" method="POST">
-            <div class="form-group">
-                <label for="review-type">Review Type</label>
-                <select id="review-type" name="review-type" required>
-                    <option value="peer">Peer</option>
-                    <option value="self">Self</option>
-                </select>
+            <div class="review-form-stuff">
+                <div class="review-form-questions">
+                    <div class="form-group">
+                        <label for="review-type">Review Type</label>
+                        <select id="review-type" name="review-type" required>
+                            <option value="peer">Peer</option>
+                            <option value="self">Self</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewer-name">Reviewer Name</label>
+                        <input type="text" id="reviewer-name" name="reviewer-name" required>
+                    </div>
+                    <div class="form-group" id="reviewee-name-group">
+                        <label for="reviewee-name">Reviewee Name </label>
+                        <input type="text" id="reviewee-name" name="reviewee-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="cca">CCA</label>
+                        <select id="cca" name="cca" required>
+                            <option value="">Select CCA</option>
+                            <!-- CCA list will be populated dynamically -->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="review-form-submitting">
+                    <button class="submit-button" type="submit">
+                        SUBMIT
+                        <img src="{{ url_for('static', filename='media/next.png') }}" alt="Close" class="next-icon">
+                    </button>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="reviewer-name">Reviewer Name</label>
-                <input type="text" id="reviewer-name" name="reviewer-name" required>
-            </div>
-            <div class="form-group" id="reviewee-name-group">
-                <label for="reviewee-name">Reviewee Name </label>
-                <input type="text" id="reviewee-name" name="reviewee-name">
-            </div>
-            <div class="form-group">
-                <label for="cca">CCA</label>
-                <select id="cca" name="cca" required>
-                    <option value="">Select CCA</option>
-                    <!-- CCA list will be populated dynamically -->
-                </select>
-            </div>
-            <button type="submit">Submit</button>
         </form>
+        
     </div>
+
+    <div id="footer-container">
+        {% include 'footer.html' %}
+    </div> 
+    
 
     <script>
         // CCA List
@@ -138,5 +225,7 @@
             window.location.href = "quiz";  
         });
     </script>
+
+    <script src="{{ url_for('static', filename='js/global.js') }}"></script>
 </body>
 </html>
