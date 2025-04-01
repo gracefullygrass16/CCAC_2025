@@ -1,6 +1,11 @@
 Student apprasial form for CCAC
 
-finish home page by 30/03/2025
+to open, run
+python ccac.py
+in the vscode terminal
+
+
+finish home pageeee
 Figma design: https://www.figma.com/proto/CG45aY1qhkvJfJT9nFZJMF/CCAC-collaboration?node-id=62-46&p=f&t=BZouWbxuFQxt5jdn-0&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1
 
 home page design for scrolling (inspiration): https://era.estate/
