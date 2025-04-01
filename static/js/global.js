@@ -1,12 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // so it loads dynamically
-    fetch("/navbar.html")
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById("navbar-container").innerHTML = data;
-            setTimeout(initializeMenu, 100);
-        })
-        .catch(error => console.error("Error loading navbar:", error));
+    //so it loads dynamically
+    setTimeout(initializeMenu, 100);
 
     function initializeMenu() {
         const menuToggle = document.getElementById("menu-toggle");
@@ -25,7 +19,37 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Menu elements not found.");
         }
     }
+
 });
+
+// document.addEventListener("DOMContentLoaded", () => {
+//     // so it loads dynamically
+//     fetch("navbar.html")
+//         .then(response => response.text())
+//         .then(data => {
+//             document.getElementById("navbar-container").innerHTML = data;
+//             setTimeout(initializeMenu, 100);
+//         })
+//         .catch(error => console.error("Error loading navbar:", error));
+
+//     function initializeMenu() {
+//         const menuToggle = document.getElementById("menu-toggle");
+//         const menuDropdown = document.getElementById("menu-dropdown");
+//         const menuClose = document.getElementById("menu-close");
+
+//         if (menuToggle && menuDropdown && menuClose) {
+//             menuToggle.addEventListener("click", () => {
+//                 menuDropdown.classList.toggle("hidden"); 
+//             });
+
+//             menuClose.addEventListener("click", () => {
+//                 menuDropdown.classList.add("hidden");
+//             });
+//         } else {
+//             console.error("Menu elements not found.");
+//         }
+//     }
+// });
 
 document.addEventListener("DOMContentLoaded", function () {
     const navbar = document.getElementById("navbar-container");
@@ -58,13 +82,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-    fetch("/footer.html")
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById("footer-container").innerHTML = data;
-            setTimeout(initializeMenu, 100); 
-        })
-        .catch(error => console.error("Error loading footer:", error));
+// document.addEventListener("DOMContentLoaded", () => {
+//     fetch("/footer.html")
+//         .then(response => response.text())
+//         .then(data => {
+//             document.getElementById("footer-container").innerHTML = data;
+//             setTimeout(initializeMenu, 100); 
+//         })
+//         .catch(error => console.error("Error loading footer:", error));
 
-});
+// });

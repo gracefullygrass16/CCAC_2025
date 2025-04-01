@@ -1,0 +1,26 @@
+<nav class="navbar">
+    <div class="nav-left">
+      <a href="/" class="nav-link">STUDENT APPRAISALS</a>
+    </div>
+
+    <div class="nav-right">
+      <button id="menu-toggle" class="menu-button">
+        MENU 
+        <img src="{{ url_for('static', filename='media/hamburger.png') }}" alt="Menu" class="icon" id="menu-icon">
+      </button>
+
+      <div id="menu-dropdown" class="menu-dropdown hidden">
+        <button id="menu-close" class="close-button">
+          MENU
+          <img src="{{ url_for('static', filename='media/close.png') }}" alt="Close" class="icon">
+        </button>
+        <ul>
+          <li><a href="/">HOME</a></li>
+          <li><a href="/quiz">APPRAISAL</a></li>
+          <li><a href="/results">RESULTS</a></li>
+          <li><a href="#">PROFILE</a></li>
+          <li><a href="#">LOGOUT</a></li>
+        </ul>
+      </div>
+    </div>
+</nav>
