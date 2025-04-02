@@ -1,3 +1,4 @@
+# CCAC Leadership Appraisal
 Student apprasial form for CCAC
 
 cuz we havent figured out vercel(maybe?) ...
@@ -10,7 +11,7 @@ Document for Project: https://docs.google.com/document/d/1Q3rAPnH-pQ20u-AD7RFOyK
 Figma design: https://www.figma.com/proto/CG45aY1qhkvJfJT9nFZJMF/CCAC-collaboration?node-id=62-46&p=f&t=BZouWbxuFQxt5jdn-0&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1
 
 
-Additional notes:
+## Additional notes
 most of the text/images are currently placeholders (other than the questions) until ccac gets back to us on what they wanna write
 (esp all the descriptions)
 
