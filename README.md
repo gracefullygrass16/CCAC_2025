@@ -1,7 +1,7 @@
 # CCAC Leadership Appraisal
 Student apprasial form for CCAC
 
-## host it locally
+## Host it locally
 ```bash
 python ccac.py
 ```
@@ -14,7 +14,7 @@ Figma design: https://www.figma.com/proto/CG45aY1qhkvJfJT9nFZJMF/CCAC-collaborat
 
 
 ## Additional notes
-most of the text/images are currently placeholders (other than the questions) until ccac gets back to us on what they wanna write
+Other than the questions, most of the text/images are currently placeholders (we chatgpt-ed them) until ccac gets back to us on what they wanna write
 (esp all the descriptions)
 
 For the frontend: we're currently still working on the results and profile pages
