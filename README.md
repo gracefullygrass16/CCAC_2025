@@ -9,6 +9,7 @@ python ccac.py
 hosting it locally cuz we havent figured out vercel(maybe?) ...
 
 Document for Project: https://docs.google.com/document/d/1Q3rAPnH-pQ20u-AD7RFOyK5akazgS57QLK0wbGEsJN8/edit?usp=sharing
+
 Figma design: https://www.figma.com/proto/CG45aY1qhkvJfJT9nFZJMF/CCAC-collaboration?node-id=62-46&p=f&t=BZouWbxuFQxt5jdn-0&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1
 
 
