@@ -100,8 +100,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const questionDiv = document.createElement("div");
             questionDiv.classList.add("question", "unattempted");
 
-            const questionP = document.createElement("p");
-            questionP.textContent = questionText;
+            const questionDivText = document.createElement("div");
+            questionDivText.textContent = questionText;
+            questionDivText.classList.add("the-question-text");
 
             const answerOptions = document.createElement("div");
             answerOptions.classList.add("answer-options");
@@ -121,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 answerOptions.appendChild(option);
             });
 
-            questionDiv.appendChild(questionP);
+            questionDiv.appendChild(questionDivText);
             questionDiv.appendChild(answerOptions);
             questionContainer.appendChild(questionDiv);
         });
@@ -129,6 +130,28 @@ document.addEventListener("DOMContentLoaded", () => {
         updateNextButton();
         updateSubmitButton();
     }
+
+    //for scrolling effect
+    function smoothScrollToElement(element, duration) {
+        const start = window.scrollY;
+        const headerOffset = 130;
+        const target = element.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+        const change = target - start;
+        const startTime = performance.now();
+    
+        function animateScroll(timestamp) {
+            const progress = (timestamp - startTime) / duration;
+            if (progress < 1) {
+                window.scrollTo(0, start + change * progress);
+                requestAnimationFrame(animateScroll);
+            } else {
+                window.scrollTo(0, target);
+            }
+        }
+    
+        requestAnimationFrame(animateScroll);
+    }
+    
 
     function handleSelection(option, questionDiv, questionIndex, score) {
         questionDiv.classList.remove("unattempted");
@@ -138,6 +161,12 @@ document.addEventListener("DOMContentLoaded", () => {
         updateProgress();
         updateNextButton();
         updateSubmitButton();
+
+        //for scrolling effect
+        const nextQuestion = questionDiv.nextElementSibling;
+        if (nextQuestion) {
+            smoothScrollToElement(nextQuestion, 500); // duration in milliseconds
+        }
     }
 
     function updateProgress() {

@@ -8,30 +8,46 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Libre+Barcode+39+Text&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=AR+One+Sans:wght@400..700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=favorite,home,search,settings" rel="stylesheet" />
 
   <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/quiz.css') }}">
 
-  <title>Student Appraisal</title>
+  <title>Appraisal</title>
 </head>
 
 <body>
     <div id="navbar-container">
         {% include 'navbar.html' %}
     </div>
+
     <div class="app-container">
-        <h1>APPRAISAL</h1>
-        <p>FIND OUT WHAT MAKES YOU A GREAT LEADER</p>
-        <div class="progress-bar">
-            <div class="progress"></div>
-            <span class="progress-percent">0%</span> 
+        <div class="appraisal-heading-thing">
+            <div class="appraisal-title">APPRAISAL</div>
+            <div class="appraisal-subtitle">FIND OUT WHAT MAKES YOU A GREAT LEADER</div>
         </div>
-        <div class="quiz-container">
-            <div class="quiz-questions"></div>
-            <div class="button-container">
-                <button id="next-btn" class="next">Next</button>
-                <button id="submit-btn" class="hidden">Submit Quiz</button>
+        
+        <div class="quiz-stuff">
+            <div class="progress-stuff">
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+                <div class="progress-percent">0%</div>
+            </div>
+
+            <div class="quiz-container">
+                <div class="quiz-questions"></div>
+                <div class="button-container">
+                    <button id="next-btn" class="next">
+                        NEXT
+                        <img src="{{ url_for('static', filename='media/next.png') }}" alt="Close" class="next-icon">
+                    </button>
+                    <button id="submit-btn" class="hidden">
+                        SUBMIT
+                        <img src="{{ url_for('static', filename='media/next.png') }}" alt="Close" class="next-icon">
+                    </button>
+                </div>
             </div>
         </div>
     </div>
