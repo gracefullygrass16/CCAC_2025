@@ -6,7 +6,7 @@ Document for Project: https://docs.google.com/document/d/1Q3rAPnH-pQ20u-AD7RFOyK
 Figma design: https://www.figma.com/proto/CG45aY1qhkvJfJT9nFZJMF/CCAC-collaboration?node-id=62-46&p=f&t=BZouWbxuFQxt5jdn-0&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1
 
 
-## Needa install flask and matplotlab before hosting
+## Needa install flask and matplotlib before hosting
 ```bash
 pip install flask
 pip install matplotlib
