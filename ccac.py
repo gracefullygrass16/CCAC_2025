@@ -4,6 +4,8 @@ from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
+from flask_migrate import Migrate
+
 # from forms import QuizSubmissionForm
 # from wtforms import Form, FieldList, IntegerField
 # from wtforms.validators import InputRequired, NumberRange
@@ -14,12 +16,16 @@ ccac.config.from_object(Config)
 
 ccac.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ccac.db' 
 db = SQLAlchemy(ccac)
+migrate = Migrate(ccac, db)
 
 class QuizResult(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     selections = db.Column(db.JSON)  # Stores the raw answer data
     normalized_scores = db.Column(db.JSON)  # Stores the calculated scores
-    collection_type = db.Column(db.String(50), default='self')
+    collection_type = db.Column(db.String(50))
+    reviewer_name = db.Column(db.String(100)) 
+    reviewee_name = db.Column(db.String(100)) 
+    cca = db.Column(db.String(100)) 
     submission_date = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
@@ -37,7 +43,12 @@ def pre():
 
 @ccac.route("/quiz")
 def quiz():
-    return render_template("quiz.html")
+    return render_template("quiz.html", 
+        review_type=request.args.get('review_type', 'self'),
+        reviewer_name=request.args.get('reviewer_name', ''),
+        reviewee_name=request.args.get('reviewee_name', ''),
+        cca=request.args.get('cca', '')
+    )
 
 @ccac.route("/footer")
 def footer():
@@ -62,7 +73,10 @@ def submit_quiz():
         new_result = QuizResult(
             selections=data.get('selections'),
             normalized_scores=data['normalized_scores'],
-            collection_type=data.get('collection', 'self')
+            collection_type=data.get('collection_type', 'self'),
+            reviewer_name=data.get('reviewer_name', ''),
+            reviewee_name=data.get('reviewee_name', ''),
+            cca=data.get('cca', '')
         )
 
         db.session.add(new_result)
@@ -76,11 +90,6 @@ def submit_quiz():
             "scores": data['normalized_scores']
         })
 
-        return jsonify({
-            "success": True,
-            "message": "Results submitted successfully!"
-        })
-        
 
     except Exception as e:
         db.session.rollback()

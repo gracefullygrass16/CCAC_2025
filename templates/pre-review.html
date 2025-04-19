@@ -200,7 +200,14 @@
     // Redirect to quiz page after form submission
     document.getElementById("review-form").addEventListener("submit", function(event) {
         event.preventDefault();  
-        window.location.href = "quiz";  
+
+        // Store the form data in sessionStorage to be passed through ccac.py in /quiz
+        sessionStorage.setItem('reviewType', document.getElementById("review-type").value);
+        sessionStorage.setItem('reviewerName', document.getElementById("reviewer-name").value);
+        sessionStorage.setItem('revieweeName', document.getElementById("reviewee-name").value || 'Self');
+        sessionStorage.setItem('cca', document.getElementById("cca").value);
+
+        window.location.href = "/quiz";
     });
 </script>
 

@@ -198,7 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
         submitResults();
     });    
 
-    function submitResults() {
+    const submitResults = async () => {
         let sensibilityScore = 0, trustworthinessScore = 0, altruismScore = 0, selfDisciplineScore = 0, resilienceScore = 0;
 
         const sensibilityEnd = sensibilityQuestions.length;
@@ -224,14 +224,20 @@ document.addEventListener("DOMContentLoaded", () => {
             Math.round((resilienceScore / (maxScore * resilienceQuestions.length)) * 100)
         ];
 
+        // Prepare the results payload
+        const results = {
+            selections: selections,
+            normalized_scores: normalizedScores,
+            collection_type: sessionStorage.getItem('reviewType') || 'self',
+            reviewer_name: sessionStorage.getItem('reviewerName') || '',
+            reviewee_name: sessionStorage.getItem('revieweeName') || 'Self',
+            cca: sessionStorage.getItem('cca') || ''
+        };
+
         fetch("/submit-results", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                selections: selections,
-                collection: "self",
-                normalized_scores: normalizedScores
-            })
+            body: JSON.stringify(results)
         })
 
         // Note: the data structure sent to backend (json)
