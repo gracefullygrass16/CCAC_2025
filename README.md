@@ -6,10 +6,10 @@ Document for Project: https://docs.google.com/document/d/1Q3rAPnH-pQ20u-AD7RFOyK
 Figma design: https://www.figma.com/proto/CG45aY1qhkvJfJT9nFZJMF/CCAC-collaboration?node-id=62-46&p=f&t=BZouWbxuFQxt5jdn-0&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1
 
 
-## Needa install flask and matplotlib before hosting
+## Needa go into the venv before hosting 
 ```bash
-pip install flask
-pip install matplotlib
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process  # only if needed
+.\venv\Scripts\Activate.ps1
 ```
 
 
@@ -26,12 +26,12 @@ Other than the questions, most of the text/images are currently placeholders (we
 (esp all the descriptions)
 
 For the frontend: we're currently still working on the results and profile pages
-- Results: just needa style it and combine hwina's design
+- Results: just needa style it and combine hwina's design 
 - profile: discuss with ccac abt the logging in with google thing and how much students can customise
 - index.html: just the scrolling thing at the top asdfghjkl
   (the inspiration: https://era.estate/)
 
 -btw to load the full quiz uncomment the questions in quiz.js cause i commented out most of the questions so debugging is easier 
 
-For the backend: we're so lost (but thinking MongoDB?)
+For the backend: DONE (using SQLite)
 
