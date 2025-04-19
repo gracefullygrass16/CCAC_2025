@@ -23,19 +23,20 @@ body {
     font-size: 36px;
     font-weight: bold;
     margin-bottom: 40px;
-    color: #f2e7cf; /* Ensures header text color matches the theme */
+    color: #f2e7cf; 
 }
 
 /* Bar chart styles */
 .chart-container {
     position: relative;
-    object-fit: contain;
-    justify-items: center;
+    justify-self: center;
+    height: 400px;
+    width: 500px;
 }
 
 canvas {
-    height: 400px;
-    width: 500px;
+    height: 100%;
+    width: 100%
 }
 
 
@@ -49,7 +50,7 @@ canvas {
 
 .results-scores div {
     font-size: 18px;
-    color: #f2e7cf; /* Ensures text color matches the theme */
+    color: #f2e7cf; 
 }
 
 .results-scores div p {

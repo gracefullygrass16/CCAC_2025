@@ -4,7 +4,6 @@
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/results.css') }}">
 
-<title>Your Results</title>
 {% endblock%}
 
 <!-- body -->
@@ -44,7 +43,8 @@
         data: data,
         plugins: [ChartDataLabels],
         options: {
-            responsive: false,
+            responsive: true,
+            maintainAspectRatio: false,
             plugins: {
                 legend: {
                     display: false
