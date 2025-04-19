@@ -24,18 +24,18 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
 
     const trustworthinessQuestions = [
-    "When you realize you have made a mistake that others haven't noticed, you openly acknowledge it rather than hoping it goes unnoticed.",
-    // "If a decision you made negatively impacts others, you take responsibility and communicate it instead of shifting blame.",
-    // "You avoid exaggerating or twisting facts to make yourself or your work look better.",
-    // "Your colleagues, peers, or teammates frequently confide in you with sensitive information or personal concerns.",
-    // "People often rely on you to handle important responsibilities because they know you will follow through.",
-    // "If an unexpected issue arises, you proactively update others rather than waiting until the last minute.",
-    // "When a project or task under your leadership fails, you take ownership of what went wrong rather than deflecting blame onto others.",
-    // "If a rule or guideline seems unfair, you voice your concerns through the proper channels rather than ignoring or bypassing it.",
-    // "You proactively seek feedback on your performance and work to improve rather than becoming defensive.",
-    // "When delegating a task, you provide clear expectations but allow the person to complete it in their own way.",
-    // "If someone you trust makes a mistake, you give them a chance to correct it rather than assuming they are unreliable.",
-    // "You are comfortable relying on others and do not feel the need to control every aspect of a project or task."
+        "When you realize you have made a mistake that others haven't noticed, you openly acknowledge it rather than hoping it goes unnoticed.",
+        // "If a decision you made negatively impacts others, you take responsibility and communicate it instead of shifting blame.",
+        // "You avoid exaggerating or twisting facts to make yourself or your work look better.",
+        // "Your colleagues, peers, or teammates frequently confide in you with sensitive information or personal concerns.",
+        // "People often rely on you to handle important responsibilities because they know you will follow through.",
+        // "If an unexpected issue arises, you proactively update others rather than waiting until the last minute.",
+        // "When a project or task under your leadership fails, you take ownership of what went wrong rather than deflecting blame onto others.",
+        // "If a rule or guideline seems unfair, you voice your concerns through the proper channels rather than ignoring or bypassing it.",
+        // "You proactively seek feedback on your performance and work to improve rather than becoming defensive.",
+        // "When delegating a task, you provide clear expectations but allow the person to complete it in their own way.",
+        // "If someone you trust makes a mistake, you give them a chance to correct it rather than assuming they are unreliable.",
+        // "You are comfortable relying on others and do not feel the need to control every aspect of a project or task."
     ];
 
     const altruismQuestions = [
@@ -229,6 +229,21 @@ document.addEventListener("DOMContentLoaded", () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ selections, collection: "self", normalized_scores: normalizedScores })
         })
+
+        // Note: the data structure sent to backend (json)
+
+        // {
+        //     "selections": {
+        //         "0": 3,
+        //         "1": 2,
+        //         "2": 4,
+        //         ...
+        //     },
+        //     "collection": "self",
+        //     "normalized_scores": [75, 82, 64, 91, 73]
+        // }
+
+    
         .then(response => response.json())
         .then(data => {
             if (data.success) {

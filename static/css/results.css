@@ -17,6 +17,7 @@ body {
     text-align: center;
 }
 
+
 /* Header style for results */
 .results-header {
     font-size: 36px;
@@ -28,20 +29,20 @@ body {
 /* Bar chart styles */
 .chart-container {
     position: relative;
-    width: 100%;
-    height: 500px;
-    margin-bottom: 40px;
+    object-fit: contain;
+    justify-items: center;
 }
 
 canvas {
-    width: 100% !important;
-    height: 100% !important;
+    height: 400px;
+    width: 500px;
 }
+
 
 /* Scores display style */
 .results-scores {
     display: flex;
-    justify-content: center;
+    justify-items: center;
     margin-top: 30px;
     gap: 30px;
 }
