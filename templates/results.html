@@ -10,6 +10,10 @@
 {% block body %}
 <div class="results-container">
     <div class="results-header">Your Quiz Results</div>
+
+    <div class="results-meta">
+        <p>Submitted on: {{ submission_date }}</p>
+    </div>
     
     <div class="chart-container">
         <canvas id="barChart"></canvas>
@@ -25,13 +29,12 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 <script>
-
-    const scores = new URLSearchParams(window.location.search).get('scores').split(',');
+    const scores = JSON.parse('{{ scores|tojson|safe }}')
 
     const data = {
         labels: ['Sensibility', 'Trustworthiness', 'Altruism', 'Self-Discipline', 'Resilience'],
         datasets: [{
-            data: scores.map(score => parseFloat(score)),
+            data: scores,
             backgroundColor: ['#A8DADC', '#C5B1D1', '#F1C6D9', '#B4C8E4', '#D3A5D2'], // Pastel blue and purple colors
             borderColor: ['#A8DADC', '#C5B1D1', '#F1C6D9', '#B4C8E4', '#D3A5D2'],
             borderWidth: 1,
@@ -58,7 +61,7 @@
                 align: 'top',     
                 color: '#f2e7cf',     
                 font: { 
-                    size: 12          
+                    size: 10          
                 }
                 // formatter: function(value) {
                 //     return value + '%'; 
@@ -93,10 +96,11 @@
     };
 
     const barChart = new Chart(document.getElementById('barChart'), config);
-    document.getElementById('sensibility-score').textContent = `${scores[0]}%`;
-    document.getElementById('trustworthiness-score').textContent = `${scores[1]}%`;
-    document.getElementById('altruism-score').textContent = `${scores[2]}%`;
-    document.getElementById('self-discipline-score').textContent = `${scores[3]}%`;
-    document.getElementById('resilience-score').textContent = `${scores[4]}%`;
+    
+    // document.getElementById('sensibility-score').textContent = `${scores[0]}%`;
+    // document.getElementById('trustworthiness-score').textContent = `${scores[1]}%`;
+    // document.getElementById('altruism-score').textContent = `${scores[2]}%`;
+    // document.getElementById('self-discipline-score').textContent = `${scores[3]}%`;
+    // document.getElementById('resilience-score').textContent = `${scores[4]}%`;
 </script>
 {% endblock%}

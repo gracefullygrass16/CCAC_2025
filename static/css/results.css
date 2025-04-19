@@ -30,8 +30,8 @@ body {
 .chart-container {
     position: relative;
     justify-self: center;
-    height: 400px;
-    width: 500px;
+    height: 350px;
+    width: 490px;
 }
 
 canvas {

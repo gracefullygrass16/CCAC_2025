@@ -1,31 +1,31 @@
 from flask import Flask, render_template, jsonify, request
 from config import Config
+
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
+
 # from forms import QuizSubmissionForm
 # from wtforms import Form, FieldList, IntegerField
 # from wtforms.validators import InputRequired, NumberRange
 
-# import matplotlib
-# from matplotlib import pyplot as plt
-# matplotlib.use('Agg')
-# import io
-# import base64
-
-# from flask_sqlalchemy import SQLAlchemy
-# from datetime import datetime
 
 ccac = Flask(__name__, static_folder="static")
 ccac.config.from_object(Config)
 
-# ccac.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ccac.db' 
-# db = SQLAlchemy(ccac)
+ccac.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ccac.db' 
+db = SQLAlchemy(ccac)
 
-# class Collectresults(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     content = db.Column(db.String(200), nullable=False)
-#     date_created = db.Column(db.DateTime, default=datetime.utcnow)
+class QuizResult(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    selections = db.Column(db.JSON)  # Stores the raw answer data
+    normalized_scores = db.Column(db.JSON)  # Stores the calculated scores
+    collection_type = db.Column(db.String(50), default='self')
+    submission_date = db.Column(db.DateTime, default=datetime.utcnow)
 
-#     def __repr__(self):
-#         return '<Results %r>' % self.id
+    def __repr__(self):
+        return f'<Result {self.id}>'
+
+
 
 @ccac.route("/")
 def index():
@@ -47,105 +47,70 @@ def footer():
 def nav():
     return render_template("navbar.html")
 
-@ccac.route("/submit-results", methods=['GET','POST'])
+@ccac.route("/submit-results", methods=['POST'])
 def submit_quiz():
+        
     try:
-        # 1. get and parse incoming json data
+        # Get and parse incoming json data
         data = request.get_json()
 
-        # 2. Validate required fields
-        if not data:
-            return jsonify({
-                "success": False,
-                "message": "No data received"
-            }), 400
-        
-        selections = data.get('selections', {})
+        # Validate data
+        if not data or 'normalized_scores' not in data:
+            return jsonify({"success": False, "message": "Invalid data"}), 400
+
+        # Create and save new result
+        new_result = QuizResult(
+            selections=data.get('selections'),
+            normalized_scores=data['normalized_scores'],
+            collection_type=data.get('collection', 'self')
+        )
+
+        db.session.add(new_result)
+        db.session.commit()
+
+        # Return success with result ID
+        return jsonify({
+            "success": True,
+            "message": "Results saved successfully!",
+            "result_id": new_result.id,
+            "scores": data['normalized_scores']
+        })
+
         return jsonify({
             "success": True,
             "message": "Results submitted successfully!"
         })
-
-        # 3. Basic data validation
-        if not selections or not normalized_scores:
-            return jsonify({
-                "success": False,
-                "message": "Missing required fields"
-            }), 400
         
-        if len(normalized_scores) != 5:
-            return jsonify({
-                "success": False,
-                "message": "Invalid scores format"
-            }), 400
-
-        # 4. (Potential) Database storage
-        # Currently commented out in the original code:
-        # new_result = Collectresults(content=str(data))
-        # db.session.add(new_result)
-        # db.session.commit()
-        
-        # 5. Return success response
-        return jsonify({
-            "success": True,
-            "message": "Results submitted successfully!",
-            "received_scores": normalized_scores  # echo back for debugging
-
-        # so successful submissions return (json)
-        # {
-        # "success": true,
-        # "message": "Results submitted successfully!",
-        # "received_scores": [75, 82, 64, 91, 73]
-        # }
-
-        })
 
     except Exception as e:
-        # 6. Handle unexpected errors
-        ccac.logger.error(f"Error processing submission: {str(e)}")
+        db.session.rollback()
+        ccac.logger.error(f"Database error: {str(e)}")
         return jsonify({
-            "success": False,
+            "success": False, 
             "message": str(e)
-        }), 500 
+        }), 500
 
 
 @ccac.route("/results")
 def results():
-    # Example: Using the scores generated earlier
-    scores = request.args.get('scores', None)  # Fetch scores passed via query parameters or database
-    if scores:
-        scores = list(map(float, scores.split(',')))  # Ensure scores are in a list of floats
-    else:
-        scores = [0, 0, 0, 0, 0]  # Default to zeros if no scores passed
+    result_id = request.args.get('id')
+    
+    if result_id:
+        result = QuizResult.query.get(result_id)
+        if result:
+            return render_template("results.html", 
+                scores=result.normalized_scores,
+                submission_date=result.submission_date.strftime('%Y-%m-%d %H:%M')
+            )
+    
+    # # Fallback - pass scores as both template variable and URL param
+    # scores = request.args.get('scores', '0,0,0,0,0')
+    # score_list = list(map(float, scores.split(',')))
+    # return render_template("results.html", 
+    #     scores=score_list,
+    #     submission_date="Unknown"
+    # )
 
-    return render_template("results.html", scores=scores)
-
-
-
-    # using matplotlib to generate an image (but not needed cuz the javascript is alr there)
-
-    # img_url = generate_bar_chart(scores)
-    # return render_template("results.html", img_url=img_url)
-
-# def generate_bar_chart(scores):
-#     categories = ["Sensibility", "Trustworthiness", "Altruism", "Self-Discipline", "Resilience"]
-#     plt.figure(figsize=(8, 5))
-#     plt.bar(categories, scores, color=["blue", "green", "orange", "red", "purple"])
-
-#     # formatting
-#     plt.ylim(0, 100)
-#     plt.xlabel("Categories")
-#     plt.ylabel("Score (%)")
-#     plt.title("Your Results")
-
-#     # convert to base64 for html embedding
-#     buf = io.BytesIO()
-#     plt.savefig(buf, format="png")
-#     buf.seek(0)
-#     img_base64 = base64.b64encode(buf.read()).decode("utf-8")
-#     buf.close() # prevent memory leaks
-
-#     return f"data:image/png;base64,{img_base64}"
 
 
 if __name__ == "__main__":

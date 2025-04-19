@@ -227,7 +227,11 @@ document.addEventListener("DOMContentLoaded", () => {
         fetch("/submit-results", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ selections, collection: "self", normalized_scores: normalizedScores })
+            body: JSON.stringify({
+                selections: selections,
+                collection: "self",
+                normalized_scores: normalizedScores
+            })
         })
 
         // Note: the data structure sent to backend (json)
@@ -245,15 +249,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     
         .then(response => response.json())
+        // .then(data => {
+        //     if (data.success) {
+        //         // Redirect to the results page with the scores
+        //         const scores = normalizedScores.join(',');
+        //         window.location.href = `/results?scores=${scores}`;
+        //     } else {
+        //         alert("An error occurred while submitting the quiz. Please try again.");
+        //     }
+        // })
         .then(data => {
             if (data.success) {
-                // Redirect to the results page with the scores
-                const scores = normalizedScores.join(',');
-                window.location.href = `/results?scores=${scores}`;
+                // Now using the scores from server response
+                window.location.href = `/results?id=${data.result_id}`;
             } else {
-                alert("An error occurred while submitting the quiz. Please try again.");
+                alert("Submission failed: " + data.message);
             }
         })
+
         .catch(error => console.error("Error submitting quiz:", error));
     }
 
